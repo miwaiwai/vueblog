@@ -1,13 +1,11 @@
 package com.learning.vueblog.controller;
 
 
+import com.learning.vueblog.entity.User;
 import com.learning.vueblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -26,5 +24,17 @@ public class UserController {
     @GetMapping("/{id}")
     public Object test(@PathVariable("id") Long id) {
         return userService.getById(id);
+    }
+
+    /**
+     * 功能描述: <br>
+     * 〈测试实体校验〉
+     *
+     * @param user
+     * @return:
+     */
+    @PostMapping("/save")
+    public Object testUser(@Validated @RequestBody User user) {
+        return user.toString();
     }
 }
